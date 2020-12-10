@@ -7,6 +7,8 @@ block content
     .caption
       | imageSrc 
       input#fileInput(type='file' name='file')
+      input#width(type="number", name="width")
+      input#height(type="number", name="height")
   .inputoutput
     canvas#canvasOutput
     .caption canvasOutput
@@ -20,9 +22,46 @@ block content
     let mat = cv.imread(imgElement);
     cv.imshow('canvasOutput', mat);
     mat.delete();
+    divideImage()
     };
     function onOpenCvReady() {
     document.getElementById('status').innerHTML = 'OpenCV.js is ready.';
     }
+
+    /*****
+    Kharleann
+    */
+    function divideImage(){
+      const canvas = document.getElementById("canvasOutput")
+      const inputWidth = document.getElementById("width").value
+      const inputHeight = document.getElementById("height").value
+      const context = canvas.getContext("2d")
+      const pixelWidth = canvas.width/inputWidth
+      const pixelHeight = canvas.height/inputHeight
+
+      
+      
+      for(let i = 0; i<canvas.width; i=i+pixelWidth){
+        context.beginPath()
+        context.moveTo(i, 0)
+        context.lineTo(i, canvas.height)
+        context.strokeStyle = "red"
+        context.stroke()
+        console.log(i)
+      }
+
+      for(let i = 0; i<canvas.height; i=i+pixelHeight){
+        context.beginPath()
+        context.moveTo(0, i)
+        context.lineTo(canvas.width, i)
+        context.strokeStyle = "red"
+        context.stroke()
+        console.log(i)
+      }
+      console.log(canvas.width, canvas.height)
+    }
+
+
+
   script(async='' src='js/opencv.js' onload='onOpenCvReady();' type='text/javascript')
   
