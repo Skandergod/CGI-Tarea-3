@@ -12,6 +12,9 @@ block content
   .inputoutput
     canvas#canvasOutput
     .caption canvasOutput
+    
+  form(method="post", action="/")
+    input(type='submit')
   script(type='text/javascript').
     let imgElement = document.getElementById('imageSrc');
     let inputElement = document.getElementById('fileInput');

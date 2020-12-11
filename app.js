@@ -9,6 +9,12 @@ var usersRouter = require('./routes/users');
 
 var app = express();
 
+const mongoose = require('mongoose');
+mongoose.connect(
+  "mongodb+srv://Skandergod:MagicNumberIs42@cluster0.e7tpy.mongodb.net/Tarea3?retryWrites=true&w=majority", 
+{ useUnifiedTopology: true, useNewUrlParser: true });
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
